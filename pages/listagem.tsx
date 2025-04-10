@@ -48,7 +48,6 @@ export default function Listagem() {
     }
     setDados(novasTabelas);
   };
-
   const handleDelete = async (table, idField, id) => {
     if (confirm("Deseja excluir este registro?")) {
       await supabase.from(table).delete().eq(idField, id);
@@ -77,7 +76,7 @@ export default function Listagem() {
 
   const gerarXML = (table) => {
     const registros = dados[table];
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<registros>\n${registros.map((r) => `  <registro>\n    ${Object.entries(r).map(([k,v]) => `<${k}>${v}</${k}>`).join("\n    ")}\n  </registro>`).join("\n")}\n</registros>`;
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>\\n<registros>\\n${registros.map((r) => \`  <registro>\\n    \${Object.entries(r).map(([k,v]) => \`<\${k}>\${v}</\${k}>\`).join(\"\\n    \")}\\n  </registro>\`).join(\"\\n\")}\\n</registros>`;
     const blob = new Blob([xml], { type: "application/xml" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -89,57 +88,22 @@ export default function Listagem() {
   return (
     <div className="p-4 space-y-10">
       <h1 className="text-2xl font-bold">Listagem Geral</h1>
-
       <Bar data={chartData} className="max-w-2xl" />
-
       <div className="flex flex-wrap gap-4 mb-4">
-        <input
-          type="text"
-          placeholder="Buscar geral"
-          value={filtro}
-          onChange={(e) => setFiltro(e.target.value)}
-          className="p-2 border rounded w-full md:w-96"
-        />
-        <input
-          type="month"
-          value={competencia}
-          onChange={(e) => setCompetencia(e.target.value)}
-          className="p-2 border rounded"
-        />
-        <select
-          value={selectedTable}
-          onChange={(e) => setSelectedTable(e.target.value)}
-          className="p-2 border rounded"
-        >
-          {Object.keys(dados).map((key) => (
-            <option key={key} value={key}>{key.replace("_", " ")}</option>
-          ))}
+        <input type="text" placeholder="Buscar geral" value={filtro} onChange={(e) => setFiltro(e.target.value)} className="p-2 border rounded w-full md:w-96" />
+        <input type="month" value={competencia} onChange={(e) => setCompetencia(e.target.value)} className="p-2 border rounded" />
+        <select value={selectedTable} onChange={(e) => setSelectedTable(e.target.value)} className="p-2 border rounded">
+          {Object.keys(dados).map((key) => <option key={key} value={key}>{key.replace("_", " ")}</option>)}
         </select>
         {dados[selectedTable].length > 0 && (
           <>
-            <CSVLink
-              data={dados[selectedTable]}
-              filename={`${selectedTable}.csv`}
-              className="bg-blue-600 text-white px-4 py-2 rounded"
-            >Exportar CSV</CSVLink>
-            <button
-              onClick={() => gerarXML(selectedTable)}
-              className="bg-amber-500 text-white px-4 py-2 rounded"
-            >Exportar XML</button>
+            <CSVLink data={dados[selectedTable]} filename={`${selectedTable}.csv`} className="bg-blue-600 text-white px-4 py-2 rounded">Exportar CSV</CSVLink>
+            <button onClick={() => gerarXML(selectedTable)} className="bg-amber-500 text-white px-4 py-2 rounded">Exportar XML</button>
           </>
         )}
       </div>
-
       {Object.entries(dados).map(([key, data]) => (
-        <Section
-          key={key}
-          title={key.replace("_", " ")}
-          data={data}
-          idField="id"
-          table={key}
-          setEditando={setEditando}
-          handleDelete={handleDelete}
-        />
+        <Section key={key} title={key.replace("_", " ")} data={data} idField="id" table={key} setEditando={setEditando} handleDelete={handleDelete} />
       ))}
 
       {editando && (
@@ -147,17 +111,8 @@ export default function Listagem() {
           <div className="bg-white p-6 rounded shadow w-full max-w-xl">
             <h2 className="text-lg font-bold mb-2">Editar Registro</h2>
             <form className="grid gap-2">
-              {Object.entries(editando).map(([key, value]) => (
-                key !== "id" && (
-                  <input
-                    key={key}
-                    name={key}
-                    value={value || ""}
-                    placeholder={key}
-                    onChange={(e) => setEditando({ ...editando, [key]: e.target.value })}
-                    className="p-2 border"
-                  />
-                )
+              {Object.entries(editando).map(([key, value]) => key !== "id" && (
+                <input key={key} name={key} value={value || ""} placeholder={key} onChange={(e) => setEditando({ ...editando, [key]: e.target.value })} className="p-2 border" />
               ))}
             </form>
             <div className="mt-4 flex gap-2 justify-end">
@@ -170,7 +125,6 @@ export default function Listagem() {
     </div>
   );
 }
-
 function Section({ title, data, table, idField, setEditando, handleDelete }) {
   if (!data.length) return null;
   return (
