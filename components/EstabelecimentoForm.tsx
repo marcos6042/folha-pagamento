@@ -23,17 +23,23 @@ export default function EstabelecimentoForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <input {...register("descricao")} placeholder="Descrição" className="p-2 border w-full" />
-      {errors.descricao?.message && <p className="text-red-600 text-sm">{String(errors.descricao.message)}</p>}
+      {typeof errors.descricao?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.descricao.message}</p>
+)}
 
       <InputMask mask="99.999.999/9999-99" {...register("cnpj")}>
         {(inputProps) => <input {...inputProps} placeholder="CNPJ" className="p-2 border w-full" />}
       </InputMask>
-      {errors.cnpj?.message && <p className="text-red-600 text-sm">{String(errors.cnpj.message)}</p>}
+      {typeof errors.cnpj?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.cnpj.message}</p>
+)}
 
       <InputMask mask="99999-999" {...register("cep")}>
         {(inputProps) => <input {...inputProps} placeholder="CEP" className="p-2 border w-full" />}
       </InputMask>
-      {errors.cep?.message && <p className="text-red-600 text-sm">{String(errors.cep.message)}</p>}
+      {typeof errors.cep?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.cep.message}</p>
+)}
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Salvar Estabelecimento</button>
     </form>
