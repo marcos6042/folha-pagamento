@@ -26,16 +26,24 @@ export default function EventoFolhaForm() {
       <InputMask mask="99/9999" {...register("competencia")}>
         {(inputProps) => <input {...inputProps} placeholder="Competência MM/AAAA" className="p-2 border w-full" />}
       </InputMask>
-      {errors.competencia?.message && <p className="text-red-600 text-sm">{String(errors.competencia.message)}</p>}
+      {typeof errors.competencia?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.competencia.message}</p>
+)}
 
       <input {...register("trabalhador_id")} placeholder="ID do trabalhador" className="p-2 border w-full" />
-      {errors.trabalhador_id?.message && <p className="text-red-600 text-sm">{String(errors.trabalhador_id.message)}</p>}
+      {typeof errors.trabalhador_id?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.trabalhador_id.message}</p>
+)}
 
       <input {...register("rubrica_id")} placeholder="ID da rubrica" className="p-2 border w-full" />
-      {errors.rubrica_id?.message && <p className="text-red-600 text-sm">{String(errors.rubrica_id.message)}</p>}
+      {typeof errors.rubrica_id?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.rubrica_id.message}</p>
+)}
 
       <input type="number" step="0.01" {...register("valor")} placeholder="Valor" className="p-2 border w-full" />
-      {errors.valor?.message && <p className="text-red-600 text-sm">{String(errors.valor.message)}</p>}
+      {typeof errors.valor?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.valor.message}</p>
+)}
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Salvar Evento</button>
     </form>
