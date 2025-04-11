@@ -22,13 +22,19 @@ export default function VinculoForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <input {...register("trabalhador_id")} placeholder="ID do trabalhador" className="p-2 border w-full" />
-      {errors.trabalhador_id?.message && <p className="text-red-600 text-sm">{String(errors.trabalhador_id.message)}</p>}
+      {typeof errors.trabalhador_id?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.trabalhador_id.message}</p>
+)}
 
       <input type="date" {...register("data_admissao")} placeholder="Data de admissão" className="p-2 border w-full" />
-      {errors.data_admissao?.message && <p className="text-red-600 text-sm">{String(errors.data_admissao.message)}</p>}
+      {typeof errors.data_admissao?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.data_admissao.message}</p>
+)}
 
       <input type="number" step="0.01" {...register("salario")} placeholder="Salário" className="p-2 border w-full" />
-      {errors.salario?.message && <p className="text-red-600 text-sm">{String(errors.salario.message)}</p>}
+      {typeof errors.salario?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.salario.message}</p>
+)}
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Salvar Vínculo</button>
     </form>
