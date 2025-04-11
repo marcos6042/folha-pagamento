@@ -179,5 +179,4 @@ function Section({ title, data, table, idField, setEditando, handleDelete }) {
         </table>
       </div>
     </section>
-  );
-}
+  );}
