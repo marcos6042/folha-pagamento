@@ -34,7 +34,22 @@ export default function Listagem() {
 
   const fetchData = async () => {
     const nomesTabelas = Object.keys(dados);
-    const novasTabelas = {};
+    const novasTabelas: {
+  empresas: any[];
+  estabelecimentos: any[];
+  trabalhadores: any[];
+  vinculos: any[];
+  eventos_folha: any[];
+  rubricas: any[];
+} = {
+  empresas: [],
+  estabelecimentos: [],
+  trabalhadores: [],
+  vinculos: [],
+  eventos_folha: [],
+  rubricas: []
+};
+;
     for (let tabela of nomesTabelas) {
       let query = supabase.from(tabela).select("*");
       if (tabela === "eventos_folha" && competencia) {
