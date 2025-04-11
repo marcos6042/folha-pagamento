@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { supabase } from "../lib/supabase";
 
 const schema = z.object({
-  nome: z.string().min(1, "Nome é obrigatório"),
-  cnpj: z.string().min(18, "CNPJ inválido")
+  nome: z.string().min(1, "Nome obrigatório"),
+  cnpj: z.string().min(14, "CNPJ obrigatório")
 });
 
 export default function EmpresaForm() {
@@ -22,15 +22,18 @@ export default function EmpresaForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <input {...register("nome")} placeholder="Nome da empresa" className="p-2 border w-full" />
-      {typeof errors.nome?.message === "string" && (<p className="text-red-600 text-sm">{errors.nome.message}</p>)}
+      {typeof errors.nome?.message === "string" && (
+        <p className="text-red-600 text-sm">{errors.nome.message}</p>
+      )}
 
       <InputMask mask="99.999.999/9999-99" {...register("cnpj")}>
         {(inputProps) => <input {...inputProps} placeholder="CNPJ" className="p-2 border w-full" />}
       </InputMask>
-      {typeof errors.cnpj?.message === "string" && (<p className="text-red-600 text-sm">{errors.cnpj.message}</p>)}
+      {typeof errors.cnpj?.message === "string" && (
+        <p className="text-red-600 text-sm">{errors.cnpj.message}</p>
+      )}
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Salvar Empresa</button>
     </form>
   );
 }
-
