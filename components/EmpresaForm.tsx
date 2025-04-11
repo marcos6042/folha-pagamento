@@ -22,7 +22,7 @@ export default function EmpresaForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <input {...register("nome")} placeholder="Nome da empresa" className="p-2 border w-full" />
-      {errors.nome && <p className="text-red-600 text-sm">{errors.nome.message}</p>}
+      {errors.nome?.message && <p className="text-red-600 text-sm">{String(errors.nome.message)}</p>}
 
       <InputMask mask="99.999.999/9999-99" {...register("cnpj")}>
         {(inputProps) => <input {...inputProps} placeholder="CNPJ" className="p-2 border w-full" />}
