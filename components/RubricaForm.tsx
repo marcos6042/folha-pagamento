@@ -23,16 +23,16 @@ export default function RubricaForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <input {...register("codigo")} placeholder="Código" className="p-2 border w-full" />
-      {errors.codigo && <p className="text-red-600 text-sm">{errors.codigo.message}</p>}
+      {errors.codigo?.message && <p className="text-red-600 text-sm">{String(errors.codigo.message)}</p>}
 
       <input {...register("descricao")} placeholder="Descrição" className="p-2 border w-full" />
-      {errors.descricao && <p className="text-red-600 text-sm">{errors.descricao.message}</p>}
+      {errors.descricao?.message && <p className="text-red-600 text-sm">{String(errors.descricao.message)}</p>}
 
       <input {...register("tipo")} placeholder="Tipo de rubrica" className="p-2 border w-full" />
-      {errors.tipo && <p className="text-red-600 text-sm">{errors.tipo.message}</p>}
+      {errors.tipo?.message && <p className="text-red-600 text-sm">{String(errors.tipo.message)}</p>}
 
       <input {...register("incidencia")} placeholder="Incidência" className="p-2 border w-full" />
-      {errors.incidencia && <p className="text-red-600 text-sm">{errors.incidencia.message}</p>}
+      {errors.incidencia?.message && <p className="text-red-600 text-sm">{String(errors.incidencia.message)}</p>}
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Salvar Rubrica</button>
     </form>
