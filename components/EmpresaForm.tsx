@@ -22,12 +22,12 @@ export default function EmpresaForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <input {...register("nome")} placeholder="Nome da empresa" className="p-2 border w-full" />
-      {errors.nome?.message && <p className="text-red-600 text-sm">{String(errors.nome.message)}</p>}
+      {typeof errors.nome?.message === "string" && (<p className="text-red-600 text-sm">{errors.nome.message}</p>)}
 
       <InputMask mask="99.999.999/9999-99" {...register("cnpj")}>
         {(inputProps) => <input {...inputProps} placeholder="CNPJ" className="p-2 border w-full" />}
       </InputMask>
-      {errors.cnpj?.message && <p className="text-red-600 text-sm">{String(errors.cnpj.message)}</p>}
+      {typeof errors.cnpj?.message === "string" && (<p className="text-red-600 text-sm">{errors.cnpj.message}</p>)}
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Salvar Empresa</button>
     </form>
