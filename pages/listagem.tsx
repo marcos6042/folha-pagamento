@@ -95,14 +95,18 @@ export default function Listagem() {
 
   const gerarXML = (table) => {
     const registros = dados[table];
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>\\n<registros>\\n${registros.map((r) => \`  <registro>\\n    \${Object.entries(r).map(([k,v]) => \`<\${k}>\${v}</\${k}>\`).join(\"\\n    \")}\\n  </registro>\`).join(\"\\n\")}\\n</registros>`;
-    const blob = new Blob([xml], { type: "application/xml" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${table}.xml`;
-    link.click();
-  };
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<registros>
+${registros
+  .map(
+    (r) => `  <registro>
+    ${Object.entries(r)
+      .map(([k, v]) => `<${k}>${v}</${k}>`)
+      .join("\n    ")}
+  </registro>`
+  )
+  .join("\n")}
+</registros>`;
 
   return (
     <div className="p-4 space-y-10">
