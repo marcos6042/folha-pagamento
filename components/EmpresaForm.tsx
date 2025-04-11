@@ -27,7 +27,7 @@ export default function EmpresaForm() {
       <InputMask mask="99.999.999/9999-99" {...register("cnpj")}>
         {(inputProps) => <input {...inputProps} placeholder="CNPJ" className="p-2 border w-full" />}
       </InputMask>
-      {errors.cnpj && <p className="text-red-600 text-sm">{errors.cnpj.message}</p>}
+      {errors.cnpj?.message && <p className="text-red-600 text-sm">{String(errors.cnpj.message)}</p>}
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Salvar Empresa</button>
     </form>
