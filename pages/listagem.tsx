@@ -135,8 +135,8 @@ ${registros
             <h2 className="text-lg font-bold mb-2">Editar Registro</h2>
             <form className="grid gap-2">
               {Object.entries(editando).map(([key, value]) => key !== "id" && (
-                <input key={key} name={key} value={value || ""} placeholder={key} onChange={(e) => setEditando({ ...editando, [key]: e.target.value })} className="p-2 border" />
-              ))}
+            <input key={key} name={key} value={String(value || "")} placeholder={key} onChange={(e) => setEditando({ ...editando, [key]: e.target.value })} className="p-2 border"/>
+             ))}
             </form>
             <div className="mt-4 flex gap-2 justify-end">
               <button onClick={() => setEditando(null)} className="text-gray-600">Cancelar</button>
