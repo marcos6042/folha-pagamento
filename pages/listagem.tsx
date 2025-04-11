@@ -63,12 +63,16 @@ export default function Listagem() {
     }
     setDados(novasTabelas);
   };
-  const handleDelete = async (table, idField, id) => {
-    if (confirm("Deseja excluir este registro?")) {
-      await supabase.from(table).delete().eq(idField, id);
-      fetchData();
-    }
-  };
+  const handleDelete = async (
+  table: string,
+  idField: string,
+  id: string | number
+) => {
+  if (confirm("Deseja excluir este registro?")) {
+    await (supabase as any).from(table).delete().eq(idField, id);
+    fetchData();
+  }
+};
 
   const handleUpdate = async () => {
     if (!editando) return;
