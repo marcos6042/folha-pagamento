@@ -22,12 +22,16 @@ export default function TrabalhadorForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <input {...register("nome")} placeholder="Nome completo" className="p-2 border w-full" />
-      {errors.nome?.message && <p className="text-red-600 text-sm">{String(errors.nome.message)}</p>}
+      {typeof errors.nome?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.nome.message}</p>
+)}
 
       <InputMask mask="999.999.999-99" {...register("cpf")}>
         {(inputProps) => <input {...inputProps} placeholder="CPF" className="p-2 border w-full" />}
       </InputMask>
-      {errors.cpf?.message && <p className="text-red-600 text-sm">{String(errors.cpf.message)}</p>}
+      {typeof errors.cpf?.message === "string" && (
+  <p className="text-red-600 text-sm">{errors.cpf.message}</p>
+)}
 
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Salvar Trabalhador</button>
     </form>
