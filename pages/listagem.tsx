@@ -180,3 +180,4 @@ function Section({ title, data, table, idField, setEditando, handleDelete }) {
       </div>
     </section>
   );}
+}
