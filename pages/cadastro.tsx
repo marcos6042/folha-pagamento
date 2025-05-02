@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from "react";
 import { supabase } from "../lib/supabase";
 import EmpresaForm from "../components/EmpresaForm";
@@ -22,4 +20,8 @@ export default function Cadastro() {
       <EventoFolhaForm />
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  return { props: {} };
 }
