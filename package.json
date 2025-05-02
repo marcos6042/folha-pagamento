@@ -19,7 +19,8 @@
     "react-hook-form": "^7.48.1",
     "zod": "^3.22.4",
     "@hookform/resolvers": "^3.1.2",
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "react-input-mask": "^3.0.0-alpha.2"  <--- ✅ pacote adicionado aqui
   },
   "devDependencies": {
     "@types/node": "^20.8.10",
